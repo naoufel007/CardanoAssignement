@@ -1,0 +1,8 @@
+To test the code, please follow this instructions : 
+
+1-clone the repository and open the solution in your IDE
+2-Run the Cardano.Api and a swagger UI will be opened in your browser
+3-Notice that there is only one controller with one action (Endpoint), so click on try out to test it
+4-You need to upload a valid Csv file
+5-After that, click on Execute
+6-In the bottom of the page, notice that you will see a download link to download the output Csv file

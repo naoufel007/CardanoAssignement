@@ -1,6 +1,4 @@
-﻿using Cardano.Domain.Dto;
-using Cardano.Domain.Entity;
-using Cardano.Logic.Mappers;
+﻿using Cardano.Logic.Mappers;
 using CsvHelper;
 using CsvHelper.Configuration;
 using System.Globalization;
@@ -13,17 +11,15 @@ public class CsvFileService : ICsvFileService
     public async Task<IEnumerable<T>> LoadDataFromCsvFileAsync<T>(Stream stream)
     {
         List<T> records = new();
-        using (StreamReader reader = new(stream))
-        using (CsvReader csv = new CsvReader(reader, CultureInfo.InvariantCulture))
+        using StreamReader reader = new(stream);
+        using CsvReader csv = new(reader, CultureInfo.InvariantCulture);
+        if (Mapping.ContainsKey(typeof(T)))
         {
-            if (Mapping.ContainsKey(typeof(T)))
-            {
-                csv.Context.RegisterClassMap(Mapping[typeof(T)]);
-            }           
-            await foreach(T record in csv.GetRecordsAsync<T>())
-            {
-                records.Add(record);
-            }
+            csv.Context.RegisterClassMap(Mapping[typeof(T)]);
+        }           
+        await foreach(T record in csv.GetRecordsAsync<T>())
+        {
+            records.Add(record);
         }
         return records;
     }

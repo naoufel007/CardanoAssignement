@@ -1,7 +1,4 @@
-﻿using Cardano.Domain.Dto;
-using Cardano.Domain.Entity;
-
-namespace Cardano.Logic;
+﻿namespace Cardano.Logic;
 
 public interface ICsvFileService
 {
